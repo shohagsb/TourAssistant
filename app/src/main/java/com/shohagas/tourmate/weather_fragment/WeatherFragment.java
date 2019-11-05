@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ import com.shohagas.tourmate.MainActivity;
 import com.shohagas.tourmate.R;
 import com.shohagas.tourmate.model.CurrentWeatherResponds;
 import com.shohagas.tourmate.services.WeatherService;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -51,7 +53,7 @@ public class WeatherFragment extends Fragment {
 
     private WeatherService service;
     private TextView dateTextView, weatherTextView, cityTextView, tempTextView;
-
+    private ImageView weatherIconIv;
 
     private FusedLocationProviderClient client;
     private Location lastLocation;
@@ -70,7 +72,6 @@ public class WeatherFragment extends Fragment {
 
 
     private SimpleDateFormat dateFormat;
-    private Calendar calendar;
 
     public WeatherFragment() {
         // Required empty public constructor
@@ -86,6 +87,7 @@ public class WeatherFragment extends Fragment {
         weatherTextView = view.findViewById(R.id.text_view_weather);
         cityTextView = view.findViewById(R.id.city_text_view);
         tempTextView = view.findViewById(R.id.temperature_text_view);
+        weatherIconIv = view.findViewById(R.id.imageView_weather_icon);
 
         dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
 
@@ -114,13 +116,15 @@ public class WeatherFragment extends Fragment {
                     String city = responds.getName();
                     String tem = responds.getMain().getTemp().toString();
                     long unixDate = responds.getDt();
-                    Date date1 = new Date(unixDate*1000);
+                    Date date1 = new Date(unixDate * 1000);
                     String date = dateFormat.format(date1);
 
                     cityTextView.setText(city);
-                    tempTextView.setText(tem);
+                    tempTextView.setText(tem+"°");
                     dateTextView.setText(date);
                     weatherTextView.setText(String.valueOf(responds.getWeather().get(0).getMain()));
+                    Picasso.get().load("http://openweathermap.org/img/wn/"+responds.getWeather().get(0).getIcon()
+                    +"@2x.png").into(weatherIconIv);
 
                 }
             }
@@ -179,7 +183,6 @@ public class WeatherFragment extends Fragment {
         super.onAttach(context);
         this.context = context;
     }
-
 
 
 }
