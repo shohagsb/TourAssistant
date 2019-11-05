@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private FragmentTransaction fragmentTransaction;
     private SupportMapFragment mapFragment;
 
-    private final int  AUTOCOMPLETE_REQUEST_CODE = 100001;
+    private final int  AUTOCOMPLETE_REQUEST_CODE = 10;
     private List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
 
     @Override
@@ -260,25 +260,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         }
     }
-
-    /*
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                Place place = Autocomplete.getPlaceFromIntent(data);
-                //Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
-            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
-                // TODO: Handle the error.
-                Status status = Autocomplete.getStatusFromIntent(data);
-                //Log.i(TAG, status.getStatusMessage());
-            } else if (resultCode == RESULT_CANCELED) {
-                // The user canceled the operation.
-            }
-        }
-    }*/
-
-
 
 }
 
