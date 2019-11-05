@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".LoginActivity">
+
+            <!--Logo Section-->
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.906"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.150"
+                app:srcCompat="@drawable/shape_circle" />
+
+            <ImageView
+                android:id="@+id/imageViewLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/imageView8"
+                app:layout_constraintHorizontal_bias="0.508"
+                app:layout_constraintStart_toStartOf="@+id/imageView8"
+                app:layout_constraintTop_toTopOf="@+id/imageView8"
+                app:srcCompat="@drawable/ic_t_log" />
+
+            <!--Login Label Section-->
+            <TextView
+                android:id="@+id/textViewLoginLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:fontFamily="monospace"
+                android:text="@string/login_label"
+                android:textColor="@color/colorBlack"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
+            <!--Email Field Section-->
+
+            <ImageView
+                android:id="@+id/imageViewEmailBoarder"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewLoginLabel"
+                app:srcCompat="@drawable/shape_stroke"
+                />
+
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:ems="10"
+                android:hint="@string/email_label"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="16dp"
+                android:drawableLeft="@drawable/ic_envelope"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewEmailBoarder"
+                app:layout_constraintEnd_toEndOf="@+id/imageViewEmailBoarder"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/imageViewEmailBoarder"
+                app:layout_constraintTop_toTopOf="@+id/imageViewEmailBoarder" />
+
+            <!--Password Section-->
+
+            <ImageView
+                android:id="@+id/imageViewPasswordBorder"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/imageViewEmailBoarder"
+                app:layout_constraintStart_toStartOf="@+id/imageViewEmailBoarder"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewEmailBoarder"
+                app:srcCompat="@drawable/shape_stroke" />
+
+            <EditText
+                android:id="@+id/editTextPassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:ems="10"
+                android:hint="@string/password_label"
+                android:inputType="textPassword"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="16sp"
+                android:drawableLeft="@drawable/ic_lock"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewPasswordBorder"
+                app:layout_constraintEnd_toEndOf="@+id/imageViewPasswordBorder"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/imageViewPasswordBorder"
+                app:layout_constraintTop_toTopOf="@+id/imageViewPasswordBorder" />
+
+            <!-- Login Button section -->
+
+            <ImageView
+                android:id="@+id/imageViewLoginButtonBorder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="@+id/imageViewPasswordBorder"
+                app:layout_constraintStart_toStartOf="@+id/imageViewPasswordBorder"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewPasswordBorder"
+                app:srcCompat="@drawable/shape_small_button_stroke" />
+
+            <Button
+                android:id="@+id/buttonLogin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/login_label"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintEnd_toEndOf="@+id/imageViewLoginButtonBorder"
+                app:layout_constraintStart_toStartOf="@+id/imageViewLoginButtonBorder"
+                app:layout_constraintTop_toTopOf="@+id/imageViewLoginButtonBorder"
+                android:background="@drawable/touch_selector"
+                android:fontFamily="monospace"
+                />
+
+            <!--Sign Up Section -->
+            <TextView
+                android:id="@+id/textViewRegiLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/not_registered_label"
+                android:textSize="14sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.420"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
+
+            <TextView
+                android:id="@+id/textViewSignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:textSize="14sp"
+                android:text="Sign Up"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintStart_toEndOf="@+id/textViewRegiLabel"
+                app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
+                android:onClick="signUp"
+                android:background="@drawable/touch_selector"
+                />
+
+            <ProgressBar
+                android:id="@+id/loginProgressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/editTextEmail"
+                app:layout_constraintStart_toStartOf="@+id/editTextEmail"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

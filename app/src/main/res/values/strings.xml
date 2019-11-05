@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Tour Mate</string>
+    <string name="login_label">Login</string>
+    <string name="email_label">Email</string>
+    <string name="password_label">Password</string>
+    <string name="register">Register</string>
+    <string name="not_registered_label">Not Registered Yet?</string>
+    <string name="create_event_label">Create an Event</string>
+    <string name="departure_date_label">Departure Date</string>
+    <string name="create_label">Create</string>
+
+    <!-- Google Map & Weather Api key -->
+    <string name="google_map_api_key">AIzaSyBoA46as0ppwQdseo9zRRbzSKMxtoE5iRw</string>
+    <string name="weather_api_key">78d2756c894c2b50fe953ccb32f44001</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

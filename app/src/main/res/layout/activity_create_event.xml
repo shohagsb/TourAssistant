@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateEventActivity">
+
+
+    <TextView
+        android:id="@+id/textCreateEventLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_event_label"
+        android:textSize="22sp"
+        android:fontFamily="monospace"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.100" />
+
+    <!-- Create Event filed-->
+    <ImageView
+        android:id="@+id/strokeEventName"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textCreateEventLabel"
+        app:srcCompat="@drawable/shape_stroke" />
+
+    <EditText
+        android:id="@+id/editTextEventName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:ems="10"
+        android:hint="Event Name"
+        android:background="@null"
+        android:drawableLeft="@drawable/ic_event"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/strokeEventName"
+        app:layout_constraintStart_toStartOf="@+id/strokeEventName"
+        app:layout_constraintTop_toTopOf="@+id/strokeEventName"
+        app:layout_constraintBottom_toBottomOf="@+id/strokeEventName"/>
+
+    <!-- Start Location filed-->
+    <ImageView
+        android:id="@+id/strokeStartLocation"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="@id/strokeEventName"
+        app:layout_constraintRight_toRightOf="@+id/strokeEventName"
+        app:layout_constraintTop_toBottomOf="@+id/strokeEventName"
+        app:srcCompat="@drawable/shape_stroke" />
+
+
+    <EditText
+        android:id="@+id/editTextEventStartLocation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:drawableLeft="@drawable/ic_location"
+        android:ems="10"
+        android:hint="Event Start Location"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/strokeStartLocation"
+        app:layout_constraintEnd_toEndOf="@+id/strokeStartLocation"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/strokeStartLocation"
+        app:layout_constraintTop_toTopOf="@+id/strokeStartLocation" />
+
+    <!-- Destination Location filed-->
+    <ImageView
+        android:id="@+id/strokeDestinationLocation"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="@id/strokeStartLocation"
+        app:layout_constraintRight_toRightOf="@+id/strokeStartLocation"
+        app:layout_constraintTop_toBottomOf="@+id/strokeStartLocation"
+        app:srcCompat="@drawable/shape_stroke" />
+
+
+    <EditText
+        android:id="@+id/editTextEventDestinationLocation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:ems="10"
+        android:hint="Event Destination Location"
+        android:textSize="16sp"
+        android:background="@null"
+        android:drawableLeft="@drawable/ic_location"
+        app:layout_constraintEnd_toEndOf="@+id/strokeDestinationLocation"
+        app:layout_constraintStart_toStartOf="@+id/strokeDestinationLocation"
+        app:layout_constraintTop_toTopOf="@+id/strokeDestinationLocation"
+        app:layout_constraintBottom_toBottomOf="@id/strokeDestinationLocation"/>
+
+    <!-- Event Budget filed-->
+    <ImageView
+        android:id="@+id/strokeEventBudget"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="@id/strokeDestinationLocation"
+        app:layout_constraintRight_toRightOf="@+id/strokeDestinationLocation"
+        app:layout_constraintTop_toBottomOf="@+id/strokeDestinationLocation"
+        app:srcCompat="@drawable/shape_stroke" />
+
+    <EditText
+        android:id="@+id/editTextEventBudget"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:ems="10"
+        android:hint="Event Budget"
+        android:textSize="16sp"
+        android:background="@null"
+        android:drawableLeft="@drawable/ic_money"
+        app:layout_constraintEnd_toEndOf="@+id/strokeEventBudget"
+        app:layout_constraintStart_toStartOf="@+id/strokeEventBudget"
+        app:layout_constraintTop_toTopOf="@+id/strokeEventBudget"
+        app:layout_constraintBottom_toBottomOf="@id/strokeEventBudget"/>
+
+    <!-- Departure Date Picker-->
+    <ImageView
+        android:id="@+id/strokeDatePicker"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/strokeEventBudget"
+        app:layout_constraintStart_toStartOf="@+id/strokeEventBudget"
+        app:layout_constraintTop_toBottomOf="@+id/strokeEventBudget"
+        app:srcCompat="@drawable/shape_long_button_stroke" />
+
+    <Button
+        android:id="@+id/buttonDatePicker"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/departure_date_label"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="@+id/strokeDatePicker"
+        app:layout_constraintStart_toStartOf="@+id/strokeDatePicker"
+        app:layout_constraintTop_toTopOf="@+id/strokeDatePicker"
+        android:background="@drawable/touch_selector"
+        android:fontFamily="monospace"
+        />
+
+    <!-- Create Event Button-->
+    <ImageView
+        android:id="@+id/strokeCreateEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonDatePicker"
+        app:layout_constraintStart_toStartOf="@+id/buttonDatePicker"
+        app:layout_constraintTop_toBottomOf="@+id/buttonDatePicker"
+        app:srcCompat="@drawable/shape_small_button_stroke" />
+
+    <Button
+        android:id="@+id/buttonCreateEvent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/create_label"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="@+id/strokeCreateEvent"
+        app:layout_constraintStart_toStartOf="@+id/strokeCreateEvent"
+        app:layout_constraintTop_toTopOf="@+id/strokeCreateEvent"
+        android:background="@drawable/touch_selector"
+        android:fontFamily="monospace"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
