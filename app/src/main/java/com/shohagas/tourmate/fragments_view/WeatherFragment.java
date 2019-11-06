@@ -1,10 +1,9 @@
-package com.shohagas.tourmate.weather_fragment;
+package com.shohagas.tourmate.fragments_view;
 
 
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -26,15 +25,12 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.libraries.places.api.net.PlacesClient;
-import com.shohagas.tourmate.MainActivity;
 import com.shohagas.tourmate.R;
 import com.shohagas.tourmate.model.CurrentWeatherResponds;
 import com.shohagas.tourmate.services.WeatherService;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import retrofit2.Call;

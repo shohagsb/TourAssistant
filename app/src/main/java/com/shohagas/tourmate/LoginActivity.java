@@ -57,9 +57,10 @@ public class LoginActivity extends AppCompatActivity {
                                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                         finish();
                                     }else{
-                                        Toast.makeText(LoginActivity.this, "Not Registered", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginActivity.this, "Email and Password not matched", Toast.LENGTH_SHORT).show();
+                                        mEmailET.setText("");
+                                        mPasswordET.setText("");
                                         progressBar.setVisibility(View.GONE);
-                                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                     }
                                 }
                             });
@@ -86,6 +87,8 @@ public class LoginActivity extends AppCompatActivity {
         if(email.isEmpty() || password.isEmpty()){
             mEmailET.setError("Field is Required");
             mPasswordET.setError("Field is Required");
+            progressBar.setVisibility(View.GONE);
+            return false;
         }
         return true;
     }

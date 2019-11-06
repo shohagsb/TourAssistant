@@ -3,17 +3,9 @@ package com.shohagas.tourmate;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.Intent;
@@ -36,38 +28,33 @@ import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.maps.android.clustering.ClusterManager;
-import com.shohagas.tourmate.adapter.EventViewAdapter;
-import com.shohagas.tourmate.event_fragment.EventListFragment;
-import com.shohagas.tourmate.model.Event;
+import com.shohagas.tourmate.fragments_view.EventListFragment;
 import com.shohagas.tourmate.model.MarkerItem;
-import com.shohagas.tourmate.nearby_places_fragment.NearByPlacesFragment;
-import com.shohagas.tourmate.profile_fragment.ProfileFragment;
-import com.shohagas.tourmate.weather_fragment.WeatherFragment;
+import com.shohagas.tourmate.fragments_view.ProfileFragment;
+import com.shohagas.tourmate.fragments_view.WeatherFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+    String  TAG = "Main Activity.class";
     private ProgressBar progressBar;
     private FloatingActionButton searchLocationFab;
 
@@ -250,11 +237,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
-                //Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
+                LatLng latLng = place.getLatLng();
+                    Toast.makeText(this, place.getName(), Toast.LENGTH_SHORT).show();
+                LatLng sydney = new LatLng(-33.852, 151.211);
+                mMap.clear();
+                mMap.addMarker(new MarkerOptions().position(sydney)
+                        .title(place.getName()));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 15));
+                Log.e(TAG, "Place: " + place.getName() + ", " + place.getId());
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
-                // TODO: Handle the error.
                 Status status = Autocomplete.getStatusFromIntent(data);
-                //Log.i(TAG, status.getStatusMessage());
+                Log.e(TAG, status.getStatusMessage());
             } else if (resultCode == RESULT_CANCELED) {
                 // The user canceled the operation.
             }

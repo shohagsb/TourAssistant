@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".weather_fragment.WeatherFragment">
+    tools:context=".fragments_view.WeatherFragment">
 
     <TextView
         android:id="@+id/text_view_date"

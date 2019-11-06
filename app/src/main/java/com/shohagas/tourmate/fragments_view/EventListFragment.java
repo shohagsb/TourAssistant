@@ -1,8 +1,7 @@
-package com.shohagas.tourmate.event_fragment;
+package com.shohagas.tourmate.fragments_view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,7 +23,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.shohagas.tourmate.CreateEventActivity;
-import com.shohagas.tourmate.MainActivity;
 import com.shohagas.tourmate.R;
 import com.shohagas.tourmate.adapter.EventViewAdapter;
 import com.shohagas.tourmate.model.Event;

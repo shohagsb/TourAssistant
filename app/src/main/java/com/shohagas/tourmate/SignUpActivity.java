@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.FirebaseDatabase;
 import com.shohagas.tourmate.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -64,6 +66,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         User user = new User(mFullName, mPhone, mEmail);
                                         currentUser = mFirebaseAuth.getCurrentUser();
+                                        updateProfile(mFullName);
                                         FirebaseDatabase.getInstance().getReference("Users")
                                                 .child(currentUser.getUid())
                                                 .setValue(user)
@@ -93,6 +96,14 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
+    private void updateProfile(String mFullName){
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(mFullName)
+                .build();
+
+        currentUser.updateProfile(profileUpdates);
+    }
+
 
     private boolean checkFields() {
         mFullName = mFullNameET.getText().toString();
@@ -107,6 +118,7 @@ public class SignUpActivity extends AppCompatActivity {
             mEmailET.setError("Required Field");
             mPasswordET.setError("Required Field");
             mConfirmPasswordET.setError("Required Field");
+            mProgressBar.setVisibility(View.GONE);
             return false;
         }
 
@@ -114,6 +126,7 @@ public class SignUpActivity extends AppCompatActivity {
             mPasswordET.setError("Password Not Matched");
             mConfirmPasswordET.setError("Password Not Matched");
             Toast.makeText(this, "Password Not Matched ", Toast.LENGTH_SHORT).show();
+            mProgressBar.setVisibility(View.GONE);
             return false;
         }
         return true;

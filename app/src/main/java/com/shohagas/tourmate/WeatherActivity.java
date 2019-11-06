@@ -22,7 +22,7 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.shohagas.tourmate.model.CurrentWeatherResponds;
-import com.shohagas.tourmate.profile_fragment.ProfileFragment;
+import com.shohagas.tourmate.fragments_view.ProfileFragment;
 import com.shohagas.tourmate.services.WeatherService;
 
 import retrofit2.Call;

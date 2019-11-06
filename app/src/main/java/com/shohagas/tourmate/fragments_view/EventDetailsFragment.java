@@ -1,4 +1,4 @@
-package com.shohagas.tourmate.event_fragment;
+package com.shohagas.tourmate.fragments_view;
 
 import android.content.Context;
 import android.os.Bundle;

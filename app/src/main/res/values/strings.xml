@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tour Mate</string>
+    <string name="app_name">Tour Assistant</string>
     <string name="login_label">Login</string>
     <string name="email_label">Email</string>
     <string name="password_label">Password</string>

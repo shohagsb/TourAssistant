@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -28,10 +27,8 @@ import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.maps.android.clustering.ClusterManager;
-import com.shohagas.tourmate.event_fragment.EventListFragment;
 import com.shohagas.tourmate.model.MarkerItem;
-import com.shohagas.tourmate.profile_fragment.ProfileFragment;
-import com.shohagas.tourmate.weather_fragment.WeatherFragment;
+import com.shohagas.tourmate.fragments_view.ProfileFragment;
 
 import java.util.ArrayList;
 import java.util.List;
