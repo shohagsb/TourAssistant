@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/map_container"
-    tools:context=".nearby_places_fragment.NearByPlacesFragment">
+    android:layout_height="match_parent">
 
-    <TextView
+    <FrameLayout
+        android:id="@+id/map_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Near by Places"/>
-</FrameLayout>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".nearby_places_fragment.NearByPlacesFragment"
+        tools:layout_editor_absoluteX="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Near by Places" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

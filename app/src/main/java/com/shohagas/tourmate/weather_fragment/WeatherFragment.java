@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,22 +49,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class WeatherFragment extends Fragment {
     private Context context;
+    private ProgressBar progressBar;
 
     private static final int LOCATION_PERMISION_CODE = 10000;
 
     private WeatherService service;
-    private TextView dateTextView, weatherTextView, cityTextView, tempTextView;
+    private TextView dateTextView, weatherTextView, cityTextView, tempTextView, maxTempTv, minTempTv;
+    private  TextView sunriseTv, sunsetTv;
     private ImageView weatherIconIv;
 
     private FusedLocationProviderClient client;
     private Location lastLocation;
 
-    private PlacesClient placesClient;
-    private String apiKey = "AIzaSyD70axDZsvWyy9pliL_HtlTjELjJ6fjdyM";
-
-    double latitude = 0.0;
-    double longitude = 0.0;
-    String temperatureUnit = "metric";
+    private double latitude = 0.0;
+    private double longitude = 0.0;
+    private String temperatureUnit = "metric";
     private static final String WEATHER_API_BASE_URL = "http://api.openweathermap.org/data/2.5/";
     private String weatherApiKey = "78d2756c894c2b50fe953ccb32f44001";
     //String apiKey = getString(R.string.weather_api_key);
@@ -72,6 +72,7 @@ public class WeatherFragment extends Fragment {
 
 
     private SimpleDateFormat dateFormat;
+    private SimpleDateFormat timeFormat;
 
     public WeatherFragment() {
         // Required empty public constructor
@@ -83,13 +84,21 @@ public class WeatherFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weather, container, false);
 
+        progressBar = view.findViewById(R.id.weatherFragment_progressbar);
+
+        progressBar.setVisibility(View.VISIBLE);
         dateTextView = view.findViewById(R.id.text_view_date);
         weatherTextView = view.findViewById(R.id.text_view_weather);
         cityTextView = view.findViewById(R.id.city_text_view);
         tempTextView = view.findViewById(R.id.temperature_text_view);
+        maxTempTv = view.findViewById(R.id.text_view_max_temp);
+        minTempTv = view.findViewById(R.id.text_view_min_temp);
+        sunriseTv = view.findViewById(R.id.text_view_sunrise);
+        sunsetTv = view.findViewById(R.id.text_view_sunset);
         weatherIconIv = view.findViewById(R.id.imageView_weather_icon);
 
         dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        timeFormat = new SimpleDateFormat("HH:mm:ss:a");
 
         client = LocationServices.getFusedLocationProviderClient(context);
 
@@ -102,6 +111,7 @@ public class WeatherFragment extends Fragment {
         service = retrofit.create(WeatherService.class);
 
         getLastLocation();
+
         return view;
     }
 
@@ -111,20 +121,32 @@ public class WeatherFragment extends Fragment {
         currentWeatherRespondsCall.enqueue(new Callback<CurrentWeatherResponds>() {
             @Override
             public void onResponse(Call<CurrentWeatherResponds> call, Response<CurrentWeatherResponds> response) {
+                progressBar.setVisibility(View.VISIBLE);
                 if (response.code() == 200) {
                     CurrentWeatherResponds responds = response.body();
                     String city = responds.getName();
                     String tem = responds.getMain().getTemp().toString();
-                    long unixDate = responds.getDt();
-                    Date date1 = new Date(unixDate * 1000);
-                    String date = dateFormat.format(date1);
+                    long currentUnixDate = responds.getDt();
+                    long sunriseUnixDate = responds.getSys().getSunrise();
+                    long sunsetUnixDate = responds.getSys().getSunset();
+                    Date currentDate = new Date(currentUnixDate * 1000);
+                    Date sunriseTime = new Date(sunriseUnixDate * 1000);
+                    Date sunsetTime = new Date(sunsetUnixDate * 1000);
+                    String date = dateFormat.format(currentDate);
+                    String sunriseT = timeFormat.format(sunriseTime);
+                    String sunSetT = timeFormat.format(sunsetTime);
 
                     cityTextView.setText(city);
-                    tempTextView.setText(tem+"°");
+                    tempTextView.setText(String.format("%s°",tem));
                     dateTextView.setText(date);
                     weatherTextView.setText(String.valueOf(responds.getWeather().get(0).getMain()));
+                    maxTempTv.setText(String.format("Max\n%s°c",responds.getMain().getTempMax().toString()));
+                    minTempTv.setText(String.format("Min\n%s°c",responds.getMain().getTempMin().toString()));
+                    sunriseTv.setText(String.format("Sunrise\n%s",sunriseT));
+                    sunsetTv.setText(String.format("Sunset\n%s",sunSetT));
                     Picasso.get().load("http://openweathermap.org/img/wn/"+responds.getWeather().get(0).getIcon()
                     +"@2x.png").into(weatherIconIv);
+                    progressBar.setVisibility(View.GONE);
 
                 }
             }
@@ -132,6 +154,7 @@ public class WeatherFragment extends Fragment {
             @Override
             public void onFailure(Call<CurrentWeatherResponds> call, Throwable t) {
                 Toast.makeText(context, "Invalide Url!", Toast.LENGTH_LONG).show();
+                progressBar.setVisibility(View.GONE);
             }
         });
     }
@@ -183,6 +206,5 @@ public class WeatherFragment extends Fragment {
         super.onAttach(context);
         this.context = context;
     }
-
 
 }

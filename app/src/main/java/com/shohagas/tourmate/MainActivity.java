@@ -1,6 +1,7 @@
 package com.shohagas.tourmate;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
@@ -19,12 +20,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -36,7 +39,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -57,11 +64,12 @@ import com.shohagas.tourmate.profile_fragment.ProfileFragment;
 import com.shohagas.tourmate.weather_fragment.WeatherFragment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
-    //private FloatingActionButton addEvent;
     private ProgressBar progressBar;
+    private FloatingActionButton searchLocationFab;
 
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser currentUser;
@@ -80,17 +88,20 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private FragmentTransaction fragmentTransaction;
     private SupportMapFragment mapFragment;
 
+    private final int  AUTOCOMPLETE_REQUEST_CODE = 100001;
+    private List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("Event List");
-        //addEvent = findViewById(R.id.addEventFAB);
-        //addEvent.setOnClickListener(floatBtnOnClickListener);
 
         progressBar = findViewById(R.id.progressBar_mainActivity);
         BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
         bottomNav.setOnNavigationItemSelectedListener(bottomItemClickListener);
+        searchLocationFab = findViewById(R.id.searchLocation_fab);
+        searchLocationFab.setOnClickListener(floatBtnOnClickListener);
 
         // For Firebase
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -121,6 +132,17 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+    /* Floating Button OnClick Listener*/
+    private View.OnClickListener floatBtnOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Autocomplete.IntentBuilder(
+                    AutocompleteActivityMode.FULLSCREEN, fields)
+                    .build(MainActivity.this);
+            startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
+        }
+    };
+
 
     /*Bottom Navigation*/
     private BottomNavigationView.OnNavigationItemSelectedListener bottomItemClickListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -129,18 +151,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             Fragment selectedFragment = null;
             switch (menuItem.getItemId()) {
                 case R.id.nav_event_list:
+                    searchLocationFab.hide();
                     selectedFragment = new EventListFragment();
                     initFragment(selectedFragment);
                     break;
                 case R.id.nav_weather:
-                    progressBar.setVisibility(View.VISIBLE);
+                    searchLocationFab.hide();
                     selectedFragment = new WeatherFragment();
                     initFragment(selectedFragment);
-                    progressBar.setVisibility(View.GONE);
                     break;
                 case R.id.nav_nearby_place:
-                    progressBar.setVisibility(View.VISIBLE);
-                    //selectedFragment = new NearByPlacesFragment();
                     //For getting Google Map Fragment
                     mapFragment = SupportMapFragment.newInstance(options);
                     fragmentTransaction = getSupportFragmentManager().beginTransaction()
@@ -148,9 +168,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     fragmentTransaction.commit();
                     //For Loading Google map in Async
                     mapFragment.getMapAsync(MainActivity.this);
-                    progressBar.setVisibility(View.GONE);
+                    searchLocationFab.show();
                     break;
                 case R.id.nav_profile:
+                    searchLocationFab.hide();
                     selectedFragment = new ProfileFragment();
                     initFragment(selectedFragment);
                     break;
@@ -176,23 +197,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         getLastLocation();
 
-        //Map Long on click listener
-        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
-            @Override
-            public void onMapLongClick(LatLng latLng) {
-                //mMap.clear();
-                /*mMap.addMarker(new MarkerOptions()
-                        .position(latLng)
-                        .title("Marker in BUBT") );*/
-                //Add latlon to as marker array list
-                mMarkerItems.add(new MarkerItem(latLng));
-                clusterManager.addItems(mMarkerItems);
-                clusterManager.cluster();
-            }
-        });
-
         checkPermission();
-
         //For locating current location
         mMap.setMyLocationEnabled(true);
 
@@ -238,6 +243,40 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = Autocomplete.getPlaceFromIntent(data);
+                //Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                // TODO: Handle the error.
+                Status status = Autocomplete.getStatusFromIntent(data);
+                //Log.i(TAG, status.getStatusMessage());
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+        }
+    }
+
+    /*
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = Autocomplete.getPlaceFromIntent(data);
+                //Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                // TODO: Handle the error.
+                Status status = Autocomplete.getStatusFromIntent(data);
+                //Log.i(TAG, status.getStatusMessage());
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+        }
+    }*/
 
 
 

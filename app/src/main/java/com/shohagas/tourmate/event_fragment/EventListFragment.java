@@ -119,6 +119,7 @@ public class EventListFragment extends Fragment implements EventViewAdapter.Clic
         super.onDetach();
     }
 
+
     @Override
     public void onClick(Event event) {
         Bundle bundle = new Bundle();
