@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Date"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorNonAccent"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/city_text_view"
         app:layout_constraintStart_toStartOf="@+id/city_text_view"
@@ -24,7 +24,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
         android:text="Weather Status"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorBluePrimary"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/temperature_text_view"
         app:layout_constraintTop_toBottomOf="@+id/temperature_text_view" />
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="City"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorBluePrimaryDark"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -52,7 +52,7 @@
         android:layout_marginRight="40dp"
         android:fontFamily="sans-serif-light"
         android:text="Temp"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorBlueAccent"
         android:textSize="58sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView_weather_icon"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,43 +73,74 @@
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="112dp"
         android:layout_marginTop="28dp"
-        android:background="@drawable/shape_stroke"
+        android:background="@drawable/list_shape_stroke"
         app:layout_constraintTop_toBottomOf="@+id/imageView_weather_icon"
         tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/text_view_maxLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Max Temp"
+        android:textColor="@color/colorBluePrimary"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.418"
+        app:layout_constraintStart_toEndOf="@+id/view2"
+        app:layout_constraintTop_toTopOf="@+id/view" />
 
     <TextView
         android:id="@+id/text_view_max_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Max Temp"
-        android:textColor="@color/colorPrimaryLight"
+        android:text="33"
+        android:textColor="@color/colorNonAccent"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toStartOf="@+id/view2"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/view"
-        app:layout_constraintVertical_bias="0.164" />
+        app:layout_constraintStart_toStartOf="@+id/text_view_maxLabel"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_maxLabel" />
+
+    <TextView
+        android:id="@+id/text_view_sunsetLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sunset Time"
+        android:textColor="@color/colorBluePrimary"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/text_view_sunrise"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_sunrise" />
 
     <TextView
         android:id="@+id/text_view_sunset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sunset"
-        android:textColor="@color/colorPrimaryLight"
+        android:text="06.00.00AM"
+        android:textColor="@color/colorNonAccent"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/text_view_sunrise"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_sunrise" />
+        app:layout_constraintStart_toStartOf="@+id/text_view_sunsetLabel"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_sunsetLabel" />
 
     <View
         android:id="@+id/view2"
         android:layout_width="1dp"
         android:layout_height="0dp"
-        android:background="@color/colorBlack"
+        android:background="@color/colorNonAccent"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/text_view_sunriseLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Sunrise Time"
+        android:textColor="@color/colorBluePrimary"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/view2"
         app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toTopOf="@+id/view" />
 
@@ -117,25 +148,31 @@
         android:id="@+id/text_view_sunrise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sunrise"
-        android:textColor="@color/colorPrimaryLight"
+        android:text="5.00.00PM"
+        android:textColor="@color/colorNonAccent"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toEndOf="@+id/view2"
-        app:layout_constraintTop_toTopOf="@+id/view"
-        app:layout_constraintVertical_bias="0.164" />
+        app:layout_constraintStart_toStartOf="@+id/text_view_sunriseLabel"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_sunriseLabel" />
+
+    <TextView
+        android:id="@+id/text_view_minLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Min Temp"
+        android:textColor="@color/colorBluePrimary"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/text_view_max_temp"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_max_temp" />
 
     <TextView
         android:id="@+id/text_view_min_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Min Temp"
-        android:textColor="@color/colorPrimaryLight"
+        android:text="16"
+        android:textColor="@color/colorNonAccent"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/text_view_max_temp"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_max_temp" />
+        app:layout_constraintStart_toStartOf="@+id/text_view_minLabel"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_minLabel" />
 
     <ProgressBar
         android:id="@+id/weatherFragment_progressbar"

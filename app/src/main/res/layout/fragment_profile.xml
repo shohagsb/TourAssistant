@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="User Display Name"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorBluePrimary"
         android:textSize="16sp"
         android:fontFamily="monospace"
         app:layout_constraintEnd_toEndOf="@+id/image_view_profilePic"
@@ -38,7 +38,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
-        android:background="@drawable/shape_stroke"
+        android:background="@drawable/list_shape_stroke"
         app:layout_constraintTop_toBottomOf="@+id/textView_userName"
         tools:layout_editor_absoluteX="0dp" />
 
@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="example@email.com"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorNonAccent"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/view_strock_email"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +61,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
-        android:background="@drawable/shape_stroke"
+        android:background="@drawable/list_shape_stroke"
         app:layout_constraintTop_toBottomOf="@+id/view_strock_email"
         tools:layout_editor_absoluteX="0dp" />
 
@@ -70,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="email varified"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorNonAccent"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/view_strock_email_validation"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,7 +84,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginLeft="4dp"
-        android:background="@drawable/shape_stroke"
+        android:background="@drawable/list_shape_stroke"
         app:layout_constraintTop_toBottomOf="@+id/view_strock_email_validation"
         tools:layout_editor_absoluteX="0dp" />
 
@@ -93,7 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="phone number"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorNonAccent"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/view_strock_phone"
         app:layout_constraintEnd_toEndOf="parent"

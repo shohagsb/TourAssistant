@@ -136,10 +136,10 @@ public class WeatherFragment extends Fragment {
                     tempTextView.setText(String.format("%s°",tem));
                     dateTextView.setText(date);
                     weatherTextView.setText(String.valueOf(responds.getWeather().get(0).getMain()));
-                    maxTempTv.setText(String.format("Max\n%s°c",responds.getMain().getTempMax().toString()));
-                    minTempTv.setText(String.format("Min\n%s°c",responds.getMain().getTempMin().toString()));
-                    sunriseTv.setText(String.format("Sunrise\n%s",sunriseT));
-                    sunsetTv.setText(String.format("Sunset\n%s",sunSetT));
+                    maxTempTv.setText(String.format("%s°c",responds.getMain().getTempMax().toString()));
+                    minTempTv.setText(String.format("%s°c",responds.getMain().getTempMin().toString()));
+                    sunriseTv.setText(String.format("%s",sunriseT));
+                    sunsetTv.setText(String.format("%s",sunSetT));
                     Picasso.get().load("http://openweathermap.org/img/wn/"+responds.getWeather().get(0).getIcon()
                     +"@2x.png").into(weatherIconIv);
                     progressBar.setVisibility(View.GONE);
