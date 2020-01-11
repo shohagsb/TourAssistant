@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments_view.EventDetailsFragment">
+    tools:context="com.shohagas.tourassistant.features.views.fragments_view.EventDetailsFragment">
 
     <TextView
         android:id="@+id/detailFragment_event_name"

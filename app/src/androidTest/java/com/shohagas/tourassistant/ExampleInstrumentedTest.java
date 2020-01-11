@@ -1,4 +1,4 @@
-package com.shohagas.tourmate;
+package com.shohagas.tourassistant;
 
 import android.content.Context;
 
